@@ -1,0 +1,10 @@
+streamlit
+openai
+beautifulsoup4
+selenium
+pdfplumber
+pdfminer.six
+python-pptx
+openpyxl
+pandas
+lxml
