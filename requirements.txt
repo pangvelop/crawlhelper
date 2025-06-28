@@ -8,3 +8,4 @@ python-pptx
 openpyxl
 pandas
 lxml
+python-dotenv

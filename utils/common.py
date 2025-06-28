@@ -5,11 +5,13 @@ from urllib.parse import urljoin
 from bs4 import BeautifulSoup, NavigableString
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from dotenv import load_dotenv
 
 from openai import OpenAI
 import os
 
 # OpenAI 클라이언트 설정
+load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 

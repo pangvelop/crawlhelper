@@ -1,7 +1,10 @@
 import re
 import os
 from openai import OpenAI
+import streamlit as st
+from dotenv import load_dotenv
 
+load_dotenv()
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 
@@ -61,3 +64,12 @@ def remove_isolated_code_fences(text):
     단독으로 존재하는 ``` 또는 ```markdown 태그를 제거합니다.
     """
     return re.sub(r"(?m)^\s*```(markdown)?\s*$", "", text)
+
+def handle_md_to_txt_tab():
+    st.header("Markdown to TXT 변환기")
+    uploaded_file = st.file_uploader("Markdown 파일 업로드", type=["md"])
+    if uploaded_file is not None:
+        md_text = uploaded_file.read().decode("utf-8")
+        st.text_area("미리보기", md_text, height=300)
+        if st.button("TXT로 변환"):
+            st.download_button("다운로드", data=md_text, file_name="converted.txt")
