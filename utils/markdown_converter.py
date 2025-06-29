@@ -36,14 +36,6 @@ def convert_chunk_to_markdown(current_chunk, previous_md=None):
     markdown_text = response.choices[0].message.content
     return remove_code_fence(markdown_text)
 
-
-def transform_level1_header(md_content):
-    """
-    Markdown 텍스트에서 레벨 1 헤더(`#`)를 '@!@' 기호로 치환해 일반 텍스트 형태로 변환합니다.
-    """
-    return re.sub(r'^( *)#(?!#)\s+', r'\1@!@ ', md_content, flags=re.MULTILINE)
-
-
 def remove_code_fence(markdown_text):
     """
     GPT 응답에서 불필요한 ``` 코드 펜스를 제거합니다.
