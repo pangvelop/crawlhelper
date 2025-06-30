@@ -7,6 +7,22 @@ import xml.etree.ElementTree as ET
 import pdfplumber
 from pdfminer.layout import LAParams
 
+def handle_file_to_md_tab():
+    st.header("파일 → Markdown 변환기")
+    uploaded_file = st.file_uploader("파일 업로드 (PDF, HWPX, PPTX, TXT, XLSX)", type=["pdf", "hwpx", "pptx", "txt", "xlsx"])
+
+    if uploaded_file is not None:
+        with st.spinner("파일 처리 중..."):
+            extracted_text = extract_text_from_file(uploaded_file)
+
+        if extracted_text.strip():
+            st.subheader("📄 추출된 Markdown")
+            st.text_area("Markdown 결과", extracted_text, height=400)
+
+            st.download_button("💾 Markdown 다운로드", data=extracted_text, file_name="converted.md")
+        else:
+            st.warning("변환 결과가 비어 있습니다.")
+
 
 def extract_text_from_pdf(file):
     file_bytes = file.read()
